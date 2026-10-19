@@ -41,10 +41,36 @@ export interface MovieCredits {
   crew: CrewMember[]
 }
 
+export interface MovieVideo {
+  id: string
+  key: string
+  name: string
+  site: string
+  type: string
+  official: boolean
+  published_at: string
+}
+
+export interface MovieVideos {
+  results: MovieVideo[]
+}
+
+export interface ProductionCompany {
+  id: number
+  name: string
+  logo_path: string | null
+  origin_country: string
+}
+
 export interface MovieDetail extends Movie {
   genres: Genre[]
   runtime: number | null
   tagline: string | null
   status: string
+  budget: number
+  revenue: number
+  original_language: string
+  production_companies: ProductionCompany[]
   credits?: MovieCredits
+  videos?: MovieVideos
 }

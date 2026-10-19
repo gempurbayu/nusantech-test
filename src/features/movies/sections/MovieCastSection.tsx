@@ -1,3 +1,4 @@
+import { Card } from "@/components/ui/card"
 import { getTmdbImageUrl } from "@/utils/tmdb"
 import type { CastMember } from "../types"
 
@@ -6,7 +7,7 @@ interface MovieCastSectionProps {
   limit?: number
 }
 
-export function MovieCastSection({ cast = [], limit = 10 }: MovieCastSectionProps) {
+export function MovieCastSection({ cast = [], limit = 6 }: MovieCastSectionProps) {
   const topCast = cast.slice(0, limit)
 
   if (topCast.length === 0) {
@@ -14,31 +15,49 @@ export function MovieCastSection({ cast = [], limit = 10 }: MovieCastSectionProp
   }
 
   return (
-    <section className="space-y-4 pt-6" data-testid="movie-cast-section">
-      <h2 className="text-xl font-bold tracking-tight">Main Cast</h2>
+    <section className="mt-12 pt-8 border-t border-border/60 space-y-6" data-testid="movie-cast-section">
+      <div className="flex items-baseline justify-between pb-2 border-b border-border/40">
+        <div>
+          <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary block">
+            Principal Ensemble
+          </span>
+          <h3 className="font-serif text-2xl sm:text-3xl text-foreground font-normal tracking-tight mt-0.5">
+            Cast &amp; Key Personas
+          </h3>
+        </div>
+        <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          {topCast.length} Headlining Talents
+        </span>
+      </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
         {topCast.map((member) => {
-          const profileUrl = getTmdbImageUrl(member.profile_path, "w200")
+          const profileUrl = getTmdbImageUrl(member.profile_path, "w300")
           return (
-            <div
+            <Card
               key={member.id}
-              className="flex items-center gap-3 rounded-lg border border-border/50 bg-card p-3 shadow-sm"
+              className="group flex flex-col bg-surface-low rounded-lg overflow-hidden border border-border/70 hover:border-primary/50 shadow-sm transition-all duration-200 p-0"
             >
-              <div className="h-12 w-12 flex-shrink-0 overflow-hidden rounded-full bg-muted">
+              {/* Headshot Portrait (3:4 ratio) */}
+              <div className="w-full aspect-[3/4] overflow-hidden bg-surface-lowest relative">
                 <img
                   src={profileUrl}
                   alt={member.name}
-                  className="h-full w-full object-cover"
+                  loading="lazy"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
-              <div className="overflow-hidden">
-                <p className="font-medium text-sm truncate">{member.name}</p>
-                <p className="text-xs text-muted-foreground truncate">
-                  {member.character}
-                </p>
+
+              {/* Actor & Character Info */}
+              <div className="p-3 flex flex-col gap-0.5 bg-surface-low">
+                <span className="font-semibold text-xs text-foreground group-hover:text-primary transition-colors truncate">
+                  {member.name}
+                </span>
+                <span className="text-[11px] text-muted-foreground truncate">
+                  {member.character || "Cast"}
+                </span>
               </div>
-            </div>
+            </Card>
           )
         })}
       </div>

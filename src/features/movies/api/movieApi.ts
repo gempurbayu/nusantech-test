@@ -1,6 +1,6 @@
 import { axiosClient } from "@/lib/axios"
 import type { PaginatedResponse } from "@/types/api.types"
-import type { Movie, MovieCategory, MovieDetail } from "../types"
+import type { Movie, MovieCategory, MovieDetail, MovieVideo } from "../types"
 
 export const movieApi = {
   getMoviesByCategory: async (
@@ -19,9 +19,16 @@ export const movieApi = {
   getMovieDetail: async (id: number | string): Promise<MovieDetail> => {
     const response = await axiosClient.get<MovieDetail>(`/movie/${id}`, {
       params: {
-        append_to_response: "credits",
+        append_to_response: "credits,videos",
       },
     })
     return response.data
+  },
+
+  getMovieVideos: async (id: number | string): Promise<MovieVideo[]> => {
+    const response = await axiosClient.get<{ results: MovieVideo[] }>(
+      `/movie/${id}/videos`
+    )
+    return response.data.results || []
   },
 }
