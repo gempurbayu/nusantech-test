@@ -21,7 +21,7 @@ export function MovieCastSection({ cast = [], limit = 6 }: MovieCastSectionProps
           <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary block">
             Principal Ensemble
           </span>
-          <h3 className="font-serif text-2xl sm:text-3xl text-foreground font-normal tracking-tight mt-0.5">
+          <h3 className="text-2xl sm:text-3xl text-foreground font-semibold tracking-tight mt-0.5">
             Cast &amp; Key Personas
           </h3>
         </div>

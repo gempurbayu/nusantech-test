@@ -100,7 +100,7 @@ export function SearchResultsSection({
         </div>
 
         <div className="flex items-center gap-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-          <span className="font-serif text-lg text-primary leading-none">
+          <span className="text-lg font-bold text-primary leading-none">
             {totalResults ? totalResults.toLocaleString() : movies.length}
           </span>
           <span>titles retrieved</span>

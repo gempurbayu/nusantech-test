@@ -80,9 +80,9 @@ export function MovieDetailHeaderSection({ movie }: MovieDetailHeaderSectionProp
         </div>
 
         {/* 2-Column Hero Grid: Left Poster & Trailer, Right Metadata */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          {/* Column Left: Poster & Watch Trailer CTA (4 cols) */}
-          <div className="lg:col-span-4 flex flex-col gap-4 max-w-sm mx-auto lg:max-w-none w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+          {/* Column Left: Poster & Watch Trailer CTA */}
+          <div className="lg:col-span-4 xl:col-span-3 flex flex-col gap-3.5 w-full max-w-[260px] sm:max-w-[280px] mx-auto lg:mx-0">
             <div className="relative w-full aspect-[2/3] rounded-xl overflow-hidden bg-surface-lowest border border-border shadow-2xl group">
               <img
                 src={posterUrl}
@@ -103,23 +103,23 @@ export function MovieDetailHeaderSection({ movie }: MovieDetailHeaderSectionProp
             <Button
               onClick={() => setIsTrailerOpen(true)}
               disabled={!trailer}
-              className="w-full h-12 uppercase tracking-wider gap-2 shadow-lg"
+              className="w-full h-11 uppercase tracking-wider gap-2 shadow-lg text-xs font-semibold"
             >
               <Play className="w-4 h-4 fill-current" />
               <span>{trailer ? "Watch Official Trailer" : "Trailer Unavailable"}</span>
             </Button>
           </div>
 
-          {/* Column Right: Details, Ratings, Synopsis, Key Credits (8 cols) */}
-          <div className="lg:col-span-8 space-y-6">
+          {/* Column Right: Details, Ratings, Synopsis, Key Credits */}
+          <div className="lg:col-span-8 xl:col-span-9 space-y-6">
             {/* Tagline & Title */}
             <div className="space-y-2">
               {movie.tagline && (
-                <p className="font-serif italic text-primary text-base sm:text-lg tracking-wide">
+                <p className="italic text-primary text-base sm:text-lg tracking-wide">
                   "{movie.tagline}"
                 </p>
               )}
-              <h1 className="font-serif text-3xl sm:text-5xl text-foreground font-bold tracking-tight leading-tight">
+              <h1 className="text-3xl sm:text-5xl text-foreground font-bold tracking-tight leading-tight">
                 {movie.title}
               </h1>
             </div>
@@ -151,7 +151,7 @@ export function MovieDetailHeaderSection({ movie }: MovieDetailHeaderSectionProp
               <div className="flex items-center gap-4">
                 {/* Score Pill / Radial Gauge */}
                 <div className="w-14 h-14 rounded-full bg-surface-container border-2 border-primary flex items-center justify-center flex-shrink-0">
-                  <span className="font-serif text-xl font-bold text-foreground">
+                  <span className="text-xl font-bold text-foreground">
                     {rating}
                   </span>
                 </div>
@@ -210,7 +210,7 @@ export function MovieDetailHeaderSection({ movie }: MovieDetailHeaderSectionProp
               <h2 className="text-xs font-bold uppercase tracking-[0.16em] text-primary">
                 Synopsis &amp; Premise
               </h2>
-              <p className="font-serif text-base sm:text-lg text-foreground/90 leading-relaxed font-normal">
+              <p className="text-base sm:text-lg text-foreground/90 leading-relaxed font-normal">
                 {movie.overview || "No synopsis available for this film."}
               </p>
             </div>
