@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest"
 import { render, screen, fireEvent } from "@testing-library/react"
-import { SearchBar } from "./SearchBar"
+import { SearchBar } from "@/features/search/components/SearchBar"
 
 describe("SearchBar", () => {
   it("renders with placeholder and current value", () => {

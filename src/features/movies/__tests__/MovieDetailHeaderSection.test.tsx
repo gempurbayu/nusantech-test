@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest"
 import { screen } from "@testing-library/react"
 import { renderWithProviders } from "@/test/test-utils"
-import { MovieDetailHeaderSection } from "./MovieDetailHeaderSection"
-import type { MovieDetail } from "../types"
+import { MovieDetailHeaderSection } from "@/features/movies/sections/MovieDetailHeaderSection"
+import type { MovieDetail } from "@/features/movies/types"
 
 const mockDetail: MovieDetail = {
   id: 693134,

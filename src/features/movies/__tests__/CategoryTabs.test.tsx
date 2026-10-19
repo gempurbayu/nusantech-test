@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest"
 import { render, screen, fireEvent } from "@testing-library/react"
-import { CategoryTabs } from "./CategoryTabs"
+import { CategoryTabs } from "@/features/movies/components/CategoryTabs"
 
 describe("CategoryTabs", () => {
   it("renders all four required categories", () => {

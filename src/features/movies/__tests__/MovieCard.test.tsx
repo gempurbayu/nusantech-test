@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest"
 import { screen } from "@testing-library/react"
 import { renderWithProviders } from "@/test/test-utils"
-import { MovieCard } from "./MovieCard"
-import type { Movie } from "../types"
+import { MovieCard } from "@/features/movies/components/MovieCard"
+import type { Movie } from "@/features/movies/types"
 
 const mockMovie: Movie = {
   id: 12345,
