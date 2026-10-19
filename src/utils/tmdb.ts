@@ -1,5 +1,9 @@
+const cleanEnv = (val?: string) => val?.trim().replace(/^["']|["']$/g, "").trim() || undefined
+
 const IMAGE_BASE_URL =
-  import.meta.env.VITE_TMDB_IMAGE_BASE_URL || "https://image.tmdb.org/t/p"
+  cleanEnv(import.meta.env.VITE_TMDB_IMAGE_BASE_URL) ||
+  cleanEnv(import.meta.env.TMDB_IMAGE_BASE_URL) ||
+  "https://image.tmdb.org/t/p"
 
 export type ImageSize = "w200" | "w300" | "w500" | "w780" | "original"
 

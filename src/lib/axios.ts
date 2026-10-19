@@ -1,8 +1,24 @@
 import axios from "axios"
 
-const baseURL = import.meta.env.VITE_TMDB_API_BASE_URL || "https://api.themoviedb.org/3"
-const apiKey = import.meta.env.VITE_TMDB_API_KEY
-const accessToken = import.meta.env.VITE_TMDB_ACCESS_TOKEN
+const cleanEnv = (val?: string) => {
+  if (!val) return undefined
+  const cleaned = val.trim().replace(/^["']|["']$/g, "").trim()
+  return cleaned || undefined
+}
+
+const baseURL =
+  cleanEnv(import.meta.env.VITE_TMDB_API_BASE_URL) ||
+  cleanEnv(import.meta.env.TMDB_API_BASE_URL) ||
+  "https://api.themoviedb.org/3"
+
+const apiKey =
+  cleanEnv(import.meta.env.VITE_TMDB_API_KEY) ||
+  cleanEnv(import.meta.env.TMDB_API_KEY) ||
+  "c05b74e1d63ea2f9a325583c031a66fd"
+
+const accessToken =
+  cleanEnv(import.meta.env.VITE_TMDB_ACCESS_TOKEN) ||
+  cleanEnv(import.meta.env.TMDB_ACCESS_TOKEN)
 
 export const axiosClient = axios.create({
   baseURL,
