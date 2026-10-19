@@ -8,16 +8,33 @@ export const axiosClient = axios.create({
   baseURL,
   headers: {
     "Content-Type": "application/json",
-    ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
-  },
-  params: {
-    ...(!accessToken && apiKey ? { api_key: apiKey } : {}),
   },
 })
 
-// Request interceptor for logging or dynamic token injection
+// Request interceptor: ensure authentication is properly attached
 axiosClient.interceptors.request.use(
-  (config) => config,
+  (config) => {
+    // 1. If valid Bearer Access Token is present (pure ASCII), attach Authorization header
+    const isValidBearer =
+      accessToken &&
+      typeof accessToken === "string" &&
+      /^[\x20-\x7E]*$/.test(accessToken) &&
+      accessToken.startsWith("eyJ")
+
+    if (isValidBearer) {
+      config.headers.Authorization = `Bearer ${accessToken}`
+    }
+
+    // 2. Attach API Key parameter (TMDB v3 standard parameter)
+    if (apiKey) {
+      config.params = {
+        api_key: apiKey,
+        ...config.params,
+      }
+    }
+
+    return config
+  },
   (error) => Promise.reject(error)
 )
 
@@ -25,11 +42,10 @@ axiosClient.interceptors.request.use(
 axiosClient.interceptors.response.use(
   (response) => response,
   (error) => {
-    // Graceful error handling
     const message =
       error.response?.data?.status_message ||
       error.message ||
-      "An unexpected error occurred"
+      "An unexpected error occurred while communicating with TMDB"
     return Promise.reject(new Error(message))
   }
 )

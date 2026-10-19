@@ -7,7 +7,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-border/60">
           {/* Col 1: Brand Info */}
           <div className="space-y-3 md:col-span-2">
-            <div className="flex items-center gap-2 text-foreground font-serif text-lg font-bold tracking-[0.16em] uppercase">
+            <div className="flex items-center gap-2 text-foreground text-lg font-extrabold tracking-[0.16em] uppercase">
               <Film className="w-5 h-5 text-primary" />
               <span>NUSAVIE</span>
             </div>

@@ -1,16 +1,8 @@
 import { Link, useNavigate, useSearchParams } from "react-router-dom"
-import { Film, Search, X } from "lucide-react"
+import { Film } from "lucide-react"
 import { type MovieCategory } from "@/features/movies/types"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
-
-const CATEGORIES: { label: string; value: MovieCategory }[] = [
-  { label: "Now Playing", value: "now_playing" },
-  { label: "Popular", value: "popular" },
-  { label: "Top Rated", value: "top_rated" },
-  { label: "Upcoming", value: "upcoming" },
-]
+import { CategoryTabs } from "@/features/movies/components/CategoryTabs"
+import { SearchBar } from "@/features/search/components/SearchBar"
 
 export function Navbar() {
   const [searchParams] = useSearchParams()
@@ -43,7 +35,7 @@ export function Navbar() {
               <Film className="w-5 h-5 text-primary transition-transform duration-300 group-hover:scale-110" />
             </div>
             <div className="flex flex-col">
-              <span className="font-serif text-lg font-bold tracking-[0.18em] uppercase text-foreground leading-none group-hover:text-primary transition-colors">
+              <span className="text-lg font-extrabold tracking-[0.18em] uppercase text-foreground leading-none group-hover:text-primary transition-colors">
                 NUSAVIE
               </span>
               <span className="text-[10px] tracking-[0.16em] uppercase text-muted-foreground leading-tight mt-1">
@@ -52,53 +44,31 @@ export function Navbar() {
             </div>
           </Link>
 
-          {/* Desktop Category Navigation */}
-          <nav className="hidden lg:flex items-center p-1 rounded-md bg-surface-lowest border border-border/70">
-            {CATEGORIES.map((cat) => {
-              const isActive = currentCategory === cat.value && !currentQuery
-              return (
-                <Button
-                  key={cat.value}
-                  variant={isActive ? "default" : "ghost"}
-                  size="sm"
-                  onClick={() => handleCategoryClick(cat.value)}
-                  className={cn(
-                    "h-8 px-3.5 text-xs font-semibold uppercase tracking-wider transition-all duration-150",
-                    !isActive && "text-muted-foreground hover:text-foreground"
-                  )}
-                >
-                  {cat.label}
-                </Button>
-              )
-            })}
-          </nav>
-        </div>
-
-        {/* Right: Quick Search Input */}
-        <div className="flex items-center gap-3 flex-1 max-w-sm justify-end">
-          <div className="relative w-full">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
-            <Input
-              type="text"
-              value={currentQuery}
-              onChange={(e) => handleSearchChange(e.target.value)}
-              placeholder="Search titles, vaults..."
-              className="h-9 pl-9 pr-8 bg-surface-lowest border-border text-xs placeholder:text-muted-foreground/60 focus-visible:ring-primary"
-              data-testid="navbar-search"
+          {/* Desktop Category Navigation via Reusable CategoryTabs */}
+          <div className="hidden md:block">
+            <CategoryTabs
+              activeCategory={currentCategory}
+              onCategoryChange={handleCategoryClick}
             />
-            {currentQuery && (
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => handleSearchChange("")}
-                className="absolute right-1 top-1/2 -translate-y-1/2 h-7 w-7 text-muted-foreground hover:text-foreground"
-                aria-label="Clear search"
-              >
-                <X className="w-3.5 h-3.5" />
-              </Button>
-            )}
           </div>
         </div>
+
+        {/* Right: Quick Search Input via Reusable SearchBar */}
+        <div className="flex items-center gap-3 flex-1 max-w-xs sm:max-w-sm justify-end">
+          <SearchBar
+            value={currentQuery}
+            onChange={handleSearchChange}
+            placeholder="Search by title, keywords..."
+          />
+        </div>
+      </div>
+
+      {/* Mobile Category Navigation Strip (< md) */}
+      <div className="md:hidden border-t border-border/50 px-4 py-2 bg-surface-lowest/80 overflow-x-auto no-scrollbar">
+        <CategoryTabs
+          activeCategory={currentCategory}
+          onCategoryChange={handleCategoryClick}
+        />
       </div>
     </header>
   )

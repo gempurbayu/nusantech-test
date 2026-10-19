@@ -87,7 +87,7 @@ export function MovieListSection({
           <Badge variant="gold" className="text-[10px] uppercase tracking-widest font-bold mb-1">
             {header.subtitle}
           </Badge>
-          <h2 className="font-serif text-2xl sm:text-3xl text-foreground font-normal tracking-tight mt-1">
+          <h2 className="text-2xl sm:text-3xl text-foreground font-bold tracking-tight mt-1">
             {header.title}
           </h2>
         </div>

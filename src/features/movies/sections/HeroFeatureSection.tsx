@@ -73,8 +73,8 @@ export function HeroFeatureSection({ movie }: HeroFeatureSectionProps) {
               </span>
             </div>
 
-            {/* Title in Newsreader Serif */}
-            <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl text-foreground font-bold tracking-tight text-balance leading-tight">
+            {/* Title in Plus Jakarta Sans */}
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl text-foreground font-extrabold tracking-tight text-balance leading-tight">
               {movie.title}
             </h1>
 
