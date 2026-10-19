@@ -79,10 +79,10 @@ export function MovieDetailHeaderSection({ movie }: MovieDetailHeaderSectionProp
           </div>
         </div>
 
-        {/* 2-Column Hero Grid: Left Poster & Trailer, Right Metadata */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
-          {/* Column Left: Poster & Watch Trailer CTA */}
-          <div className="lg:col-span-4 xl:col-span-3 flex flex-col gap-3.5 w-full max-w-[260px] sm:max-w-[280px] mx-auto lg:mx-0">
+        {/* 2-Column Hero Grid: Left Poster, Right Metadata & Actions */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          {/* Column Left: Poster (4 cols) */}
+          <div className="lg:col-span-4 flex flex-col max-w-sm mx-auto lg:max-w-none w-full">
             <div className="relative w-full aspect-[2/3] rounded-xl overflow-hidden bg-surface-lowest border border-border shadow-2xl group">
               <img
                 src={posterUrl}
@@ -98,20 +98,10 @@ export function MovieDetailHeaderSection({ movie }: MovieDetailHeaderSectionProp
                 </Badge>
               </div>
             </div>
-
-            {/* Watch Trailer Button */}
-            <Button
-              onClick={() => setIsTrailerOpen(true)}
-              disabled={!trailer}
-              className="w-full h-11 uppercase tracking-wider gap-2 shadow-lg text-xs font-semibold"
-            >
-              <Play className="w-4 h-4 fill-current" />
-              <span>{trailer ? "Watch Official Trailer" : "Trailer Unavailable"}</span>
-            </Button>
           </div>
 
-          {/* Column Right: Details, Ratings, Synopsis, Key Credits */}
-          <div className="lg:col-span-8 xl:col-span-9 space-y-6">
+          {/* Column Right: Details, Ratings, Synopsis, Key Credits, Watch Trailer CTA (8 cols) */}
+          <div className="lg:col-span-8 space-y-6">
             {/* Tagline & Title */}
             <div className="space-y-2">
               {movie.tagline && (
@@ -210,7 +200,7 @@ export function MovieDetailHeaderSection({ movie }: MovieDetailHeaderSectionProp
               <h2 className="text-xs font-bold uppercase tracking-[0.16em] text-primary">
                 Synopsis &amp; Premise
               </h2>
-              <p className="text-base sm:text-lg text-foreground/90 leading-relaxed font-normal">
+              <p className="text-sm sm:text-base text-foreground/90 leading-relaxed font-normal line-clamp-3">
                 {movie.overview || "No synopsis available for this film."}
               </p>
             </div>
@@ -248,6 +238,18 @@ export function MovieDetailHeaderSection({ movie }: MovieDetailHeaderSectionProp
                 </span>
                 <span className="text-[11px] text-muted-foreground block">Production</span>
               </Card>
+            </div>
+
+            {/* Watch Trailer Action Button */}
+            <div className="pt-2">
+              <Button
+                onClick={() => setIsTrailerOpen(true)}
+                disabled={!trailer}
+                className="h-11 px-6 uppercase tracking-wider gap-2 shadow-lg text-xs font-semibold"
+              >
+                <Play className="w-4 h-4 fill-current" />
+                <span>{trailer ? "Watch Official Trailer" : "Trailer Unavailable"}</span>
+              </Button>
             </div>
           </div>
         </div>
